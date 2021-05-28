@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 export default registerAs('app', () => ({
-  port: process.env.APP_PORT,
+  port: process.env.PORT,
   sateliteKenobiPosition: process.env.SATELITE_KENOBI_POSITION,
   sateliteSkywalkerPosition: process.env.SATELITE_SKYWALKER_POSITION,
   sateliteSatoPosition: process.env.SATELITE_SATO_POSITION,

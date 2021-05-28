@@ -16,7 +16,7 @@ async function bootstrap() {
   });
 
   const config = app.get(ConfigService);
-  const port = parseInt(config.get<string>('APP_PORT'), 10) || 40000;
+  const port = parseInt(config.get<string>('PORT'), 10) || 40000;
 
   console.log(port);
   app.useGlobalPipes(
