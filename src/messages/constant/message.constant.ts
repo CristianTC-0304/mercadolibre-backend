@@ -1,0 +1,1 @@
+export const MessageError = 'No se ha encontrado el mensaje'
