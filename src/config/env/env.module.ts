@@ -7,7 +7,6 @@ import EnvConfiguration from './env.configuration';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env.dev',
       isGlobal: true,
       load: [EnvConfiguration],
     }),
