@@ -3,19 +3,22 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { EnvConfigRepository } from './config/env/repositories/envRepository.service';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  });
+  // app.enableCors({
+  //   origin: '*',
+  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  //   preflightContinue: false,
+  //   optionsSuccessStatus: 204,
+  // });
 
-  const appConfig: EnvConfigRepository = app.get('EnvConfigRepository');
-  console.log(appConfig.port);
+  const config = app.get(ConfigService);
+  const port = parseInt(config.get<string>('APP_PORT'), 10) || 3000;
+
+  console.log(port);
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -33,6 +36,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(process.env.APP_PORT || 3000);
+  await app.listen(port);
 }
 bootstrap();
